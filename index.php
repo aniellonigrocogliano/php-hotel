@@ -1,3 +1,46 @@
+<?php
+
+    $hotels = [
+
+        [
+            'name' => 'Hotel Belvedere',
+            'description' => 'Hotel Belvedere Descrizione',
+            'parking' => true,
+            'vote' => 4,
+            'distance_to_center' => 10.4
+        ],
+        [
+            'name' => 'Hotel Futuro',
+            'description' => 'Hotel Futuro Descrizione',
+            'parking' => true,
+            'vote' => 2,
+            'distance_to_center' => 2
+        ],
+        [
+            'name' => 'Hotel Rivamare',
+            'description' => 'Hotel Rivamare Descrizione',
+            'parking' => false,
+            'vote' => 1,
+            'distance_to_center' => 1
+        ],
+        [
+            'name' => 'Hotel Bellavista',
+            'description' => 'Hotel Bellavista Descrizione',
+            'parking' => false,
+            'vote' => 5,
+            'distance_to_center' => 5.5
+        ],
+        [
+            'name' => 'Hotel Milano',
+            'description' => 'Hotel Milano Descrizione',
+            'parking' => true,
+            'vote' => 2,
+            'distance_to_center' => 50
+        ],
+
+    ];
+
+?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -9,17 +52,7 @@
 </head>
 
 <body>
-    <form action="action.php" method="GET" class="container p-3">
-        <div class="mb-3">
-            <label class="form-label">Inserisci testo</label>
-            <textarea class="form-control" id="testo" rows="3" name="text"></textarea>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Inserisci parola da censurare</label>
-            <input type="text" class="form-control" id="word-da-censurare" name="word" >
-        </div>
-        <button type="submit" class="btn btn-primary">Censura</button>
-    </form>
+
 </body>
 
 </html>
