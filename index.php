@@ -47,6 +47,7 @@ $hotels = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>PHP Hotel</title>
 </head>
 
@@ -127,13 +128,20 @@ $hotels = [
             $distance = $cur_hotel["distance_to_center"];
 
             echo "<div class=\"card\">
-            <h5 class=\"card-header\"> {$name} </h5>
+            <h5 class=\"card-header\"> <i class='fas fa-hotel'></i> {$name} </h5>
             <div class=\"card-body\">
-            <h5 class=\"card-title\">Info:</h5>
-                <p class=\"card-text\">Descrizione: $description.</p>
-                <p class=\"card-text\">Parcheggio: $parking.</p>
-                <p class=\"card-text\">Valutazione: $vote su 5.</p>
-                <p class=\"card-text\">Distanza dal centro: $distance KM.</p>
+            <h5 class=\"card-title\"> <i class=\"fa fa-info-circle\"></i> Info:</h5>
+                <p class=\"card-text\"> <i class=\"fa fa-tv\"></i> Descrizione: $description.</p>
+                <p class=\"card-text\"><i class=\"fa fa-car\"></i> Parcheggio: $parking.</p>
+                <p class=\"card-text\"><i class=\"fa fa-thumbs-up\"></i> Valutazione:";
+                for ($i=0; $i <5 ; $i++) { 
+                    if($vote>$i){
+                        echo "<i class=\"fa fa-star\" style=\"color:yellow\"></i>";
+                    }else{
+                        echo "<i class=\"fa fa-star\" style=\"color:grey\"></i>";
+                    };
+                };
+              echo  "<p class=\"card-text\"><i class=\"fa fa-location-arrow\"></i> Distanza dal centro: $distance KM.</p>
             </div>";
         }
         $parkitf = "";
