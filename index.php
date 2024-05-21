@@ -39,7 +39,6 @@ $hotels = [
     ],
 
 ];
-
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -53,18 +52,81 @@ $hotels = [
 
 <body class="container">
     <section>
-        <?php foreach ($hotels as $index => $cur_hotel){
-            $name=$cur_hotel["name"];
-            $description=$cur_hotel["description"];
-            if($cur_hotel["parking"]){
-                $parking="Presente";
-            } else {
-                $parking="Assente";
-            }
-            $vote=$cur_hotel["vote"];
-            $distance=$cur_hotel["distance_to_center"];
+        <form action="index.php" method="GET" class="d-flex p-3">
+            <div>
+                <select class="form-select m-3" aria-label="Valutazione" name="vote">
+                    <option selected value="nd">Filtra per valutazione</option>
+                    <option value="1">1 o maggiore</option>
+                    <option value="2">2 o maggiore</option>
+                    <option value="3">3 o maggiore</option>
+                    <option value="4">4 o maggiore</option>
+                    <option value="5">Solo 5</option>
+                </select>
+            </div>
+            <div>
+                <select class="form-select m-3" aria-label="Parcheggio" name="parking">
+                    <option value="nd">Filtra per parcheggio</option>
+                    <option value="true">Parcheggio presente</option>
+                    <option value="false">Parcheggio assente</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary m-3">Filtra</button>
+        </form>
+    </section>
+    <section>
+        <?php
 
-         echo "<div class=\"card\">
+        $newarray = [];
+        if (empty($_GET)) {
+            if (empty($_GET["vote"])) {
+                $voteget = "nd";
+            }
+            if (empty($_GET["parking"])) {
+                $parkingget = "nd";
+            }
+        } else {
+            $parkingget = $_GET["parking"];
+            $voteget = $_GET["vote"];
+            if ($parkingget == "true") {
+                $parkingget = "on";
+            } elseif($parkingget == "false") {
+                $parkingget = "off";
+            }
+        }
+        foreach ($hotels as $index => $cur_hotel) {
+            if ($cur_hotel["parking"]) {
+                $parkitf = "on";
+            } else {
+                $parkitf = "off";
+            }
+
+            if ($voteget != "nd" and  $parkingget != "nd") {
+                if ($cur_hotel["vote"] >= $voteget && $parkitf == $parkingget)
+                    $newarray[] = $cur_hotel;
+            } elseif ($voteget != "nd") {
+                if ($cur_hotel["vote"] >= $voteget) {
+                    $newarray[] = $cur_hotel;
+                }
+            } elseif ($parkingget != "nd") {
+                if ($parkitf == $parkingget) {
+                    $newarray[] = $cur_hotel;
+                }
+            } elseif ($voteget == "nd" &&  $parkingget == "nd") {
+                $newarray[] = $cur_hotel;
+            }
+        }
+        foreach ($newarray as $index => $cur_hotel) {
+            $name = $cur_hotel["name"];
+            $description = $cur_hotel["description"];
+            if ($cur_hotel["parking"]) {
+                $parking = "Presente";
+            } else {
+                $parking = "Assente";
+            }
+            $vote = $cur_hotel["vote"];
+            $distance = $cur_hotel["distance_to_center"];
+
+            echo "<div class=\"card\">
             <h5 class=\"card-header\"> {$name} </h5>
             <div class=\"card-body\">
             <h5 class=\"card-title\">Info:</h5>
@@ -73,7 +135,9 @@ $hotels = [
                 <p class=\"card-text\">Valutazione: $vote su 5.</p>
                 <p class=\"card-text\">Distanza dal centro: $distance KM.</p>
             </div>";
-            }?>
+        }
+        $parkitf = "";
+        ?>
     </section>
     </div>
 </body>
